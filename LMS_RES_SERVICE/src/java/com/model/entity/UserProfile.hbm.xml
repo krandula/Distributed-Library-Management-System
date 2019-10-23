@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 25, 2019 10:09:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.entity.UserProfile" table="user_profile" catalog="library_management_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="country" class="com.model.entity.Country" fetch="select">
+            <column name="country_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userLoginHistory" class="com.model.entity.UserLoginHistory" fetch="select">
+            <column name="user_login_history_id" />
+        </many-to-one>
+        <many-to-one name="userProfileType" class="com.model.entity.UserProfileType" fetch="select">
+            <column name="user_profile_type_id" not-null="true" />
+        </many-to-one>
+        <property name="generatedId" type="string">
+            <column name="generatedID" length="45" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="45" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="45" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" length="45" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="16777215" />
+        </property>
+        <property name="createDateTime" type="timestamp">
+            <column name="createDateTime" length="19" />
+        </property>
+        <property name="updateDateTime" type="timestamp">
+            <column name="updateDateTime" length="19" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+        <property name="isApproved" type="java.lang.Boolean">
+            <column name="isApproved" />
+        </property>
+        <set name="userLogins" table="user_login" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_profile_id" not-null="true" />
+            </key>
+            <one-to-many class="com.model.entity.UserLogin" />
+        </set>
+    </class>
+</hibernate-mapping>

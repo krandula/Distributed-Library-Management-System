@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 25, 2019 10:09:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.entity.BookProfile" table="book_profile" catalog="library_management_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bookAuthor" class="com.model.entity.BookAuthor" fetch="select">
+            <column name="book_author_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="bookCategory" class="com.model.entity.BookCategory" fetch="select">
+            <column name="book_category_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="bookPrinters" class="com.model.entity.BookPrinters" fetch="select">
+            <column name="book_printers_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userLoginHistory" class="com.model.entity.UserLoginHistory" fetch="select">
+            <column name="user_login_history_id" not-null="true" />
+        </many-to-one>
+        <property name="generatedId" type="string">
+            <column name="generatedID" length="45" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="isbn" type="string">
+            <column name="ISBN" length="145" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="65535" />
+        </property>
+        <property name="bookCount" type="java.lang.Integer">
+            <column name="bookCount" />
+        </property>
+        <property name="printedYear" type="java.lang.Integer">
+            <column name="printedYear" />
+        </property>
+        <property name="createDateTime" type="timestamp">
+            <column name="createDateTime" length="19" />
+        </property>
+        <property name="updateDateTime" type="timestamp">
+            <column name="updateDateTime" length="19" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 25, 2019 10:09:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.entity.UserProfileType" table="user_profile_type" catalog="library_management_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45">
+                <comment>local, foreign</comment>
+            </column>
+        </property>
+        <set name="userProfiles" table="user_profile" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_profile_type_id" not-null="true" />
+            </key>
+            <one-to-many class="com.model.entity.UserProfile" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 25, 2019 10:09:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.entity.UserLogin" table="user_login" catalog="library_management_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userProfile" class="com.model.entity.UserProfile" fetch="select">
+            <column name="user_profile_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userRole" class="com.model.entity.UserRole" fetch="select">
+            <column name="user_role_id" not-null="true" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="145" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="65535" />
+        </property>
+        <property name="createDateTime" type="timestamp">
+            <column name="createDateTime" length="19" />
+        </property>
+        <property name="updateDateTime" type="timestamp">
+            <column name="updateDateTime" length="19" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+        <set name="userLoginHistories" table="user_login_history" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_login_id" not-null="true" />
+            </key>
+            <one-to-many class="com.model.entity.UserLoginHistory" />
+        </set>
+    </class>
+</hibernate-mapping>

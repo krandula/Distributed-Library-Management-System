@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 25, 2019 10:09:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.model.entity.UserLoginHistory" table="user_login_history" catalog="library_management_system" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userLogin" class="com.model.entity.UserLogin" fetch="select">
+            <column name="user_login_id" not-null="true" />
+        </many-to-one>
+        <property name="loginDateTime" type="timestamp">
+            <column name="loginDateTime" length="19" />
+        </property>
+        <property name="logoutDateTime" type="timestamp">
+            <column name="logoutDateTime" length="19" />
+        </property>
+        <set name="userProfiles" table="user_profile" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_login_history_id" />
+            </key>
+            <one-to-many class="com.model.entity.UserProfile" />
+        </set>
+        <set name="bookProfiles" table="book_profile" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_login_history_id" not-null="true" />
+            </key>
+            <one-to-many class="com.model.entity.BookProfile" />
+        </set>
+    </class>
+</hibernate-mapping>
